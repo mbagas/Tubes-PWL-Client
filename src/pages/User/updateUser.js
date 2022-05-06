@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@mui/material/Button";
@@ -9,7 +9,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup
@@ -22,8 +22,20 @@ const validationSchema = yup.object({
     .required("Password is required"),
 });
 
-const CreateUser = () => {
+const UpdateUser = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [user, setUser] = React.useState({});
+
+  const fetchUsers = async () => {
+    await axios.get(`http://127.0.0.1:8000/api/user/${id}`).then((response) => {
+      setUser(response.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -38,12 +50,12 @@ const CreateUser = () => {
     onSubmit: (values) => {
       console.log(values);
       axios
-        .post("http://127.0.0.1:8000/api/user", values)
+        .put(`http://127.0.0.1:8000/api/user/${id}`, values)
         .then((response) => {
           console.log(response);
           Swal.fire({
             title: "Success",
-            text: "User created successfully",
+            text: "User Update successfully",
             icon: "success",
             confirmButtonText: "OK",
           });
@@ -149,4 +161,4 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default UpdateUser;

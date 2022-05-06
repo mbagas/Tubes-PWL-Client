@@ -4,10 +4,14 @@ import Button from "@mui/material/Button";
 import DataTable from "react-data-table-component";
 import _ from "lodash";
 import { FilterComponent } from "../../components";
+import { Navigate, useNavigate } from "react-router-dom";
+
 const User = () => {
   const handleButtonClick = (id) => {
     console.log("clicked");
   };
+
+  const navigate = useNavigate();
 
   const columns = [
     {
@@ -22,10 +26,11 @@ const User = () => {
     },
     {
       name: "Role",
-      selector: (row) => row.role,
+      selector: (row) => row.roles.role,
       sortable: true,
     },
     {
+      name: "Action",
       cell: (row) =>
         row.id ? (
           <Button
@@ -33,6 +38,7 @@ const User = () => {
             onClick={() => {
               console.log(row.id);
               handleButtonClick(row.id);
+              navigate("/user/edit/" + row.id);
             }}
           >
             Edit {row.id}
