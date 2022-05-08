@@ -12,6 +12,7 @@ import {
   Notifications,
   RestaurantMenu,
   ShoppingCart,
+  Logout,
 } from "@mui/icons-material";
 import {
   Badge,
@@ -28,6 +29,8 @@ import {
   Typography,
 } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -109,22 +112,27 @@ const ListMenu = [
   {
     text: "Produk",
     icon: <RestaurantMenu />,
-    path: "/Produk",
+    path: "/produk",
   },
   {
     text: "Transaksi",
     icon: <ShoppingCart />,
-    path: "/Transaksi",
+    path: "/transaksi",
   },
   {
     text: "Data Pegawai",
     icon: <Group />,
-    path: "/DataPegawai",
+    path: "/user",
+  },
+  {
+    text: "Logout",
+    icon: <Logout />,
+    path: "/logout",
   },
 ];
 
 // MAIN
-export default function Navbar() {
+export default function Navbar(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -137,39 +145,39 @@ export default function Navbar() {
   };
 
   // ITEM ICONS SEBELAH KANAN
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorel, setanchorel] = React.useState(null);
+  const [mobileMoreanchorel, setMobileMoreanchorel] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMenuOpen = Boolean(anchorel);
+  const isMobileMenuOpen = Boolean(mobileMoreanchorel);
 
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setanchorel(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+    setMobileMoreanchorel(null);
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
+    setanchorel(null);
     handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+    setMobileMoreanchorel(event.currentTarget);
   };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
+      anchorel={anchorel}
+      anchororigin={{
         vertical: "top",
         horizontal: "right",
       }}
       id={menuId}
-      keepMounted
+      keepmounted="true"
       transformOrigin={{
         vertical: "top",
         horizontal: "right",
@@ -185,13 +193,13 @@ export default function Navbar() {
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
+      anchorel={mobileMoreanchorel}
+      anchororigin={{
         vertical: "top",
         horizontal: "right",
       }}
       id={mobileMenuId}
-      keepMounted
+      keepmounted
       transformOrigin={{
         vertical: "top",
         horizontal: "right",
@@ -302,28 +310,34 @@ export default function Navbar() {
         <Divider />
         <List>
           {ListMenu.map((item) => (
-            <ListItemButton
-              key={item.text}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <a href={item.path} style={{ textDecoration: "none" }}>
+              <ListItemButton
+                key={item.text}
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
+                href={item.path}
               >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.text}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.text}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    color: "text.primary",
+                  }}
+                />
+              </ListItemButton>
+            </a>
           ))}
         </List>
         <Divider />
@@ -332,8 +346,7 @@ export default function Navbar() {
       {/* KONTEN DISINI */}
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>PARAGRAPH PERTAMA</Typography>
-        <Typography paragraph>PARAGRAPH KEDUA</Typography>
+        {props.children}
       </Box>
     </Box>
   );
