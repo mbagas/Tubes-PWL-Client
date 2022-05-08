@@ -15,6 +15,7 @@ import {
   Logout,
 } from "@mui/icons-material";
 import {
+  AppBar,
   Badge,
   Box,
   CssBaseline,
@@ -65,24 +66,24 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  backgroundColor: "#311C82",
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+// const AppBar = styled(MuiAppBar, {
+//   shouldForwardProp: (prop) => prop !== "open",
+// })(({ theme, open }) => ({
+//   backgroundColor: "#311C82",
+//   zIndex: theme.zIndex.drawer + 1,
+//   transition: theme.transitions.create(["width", "margin"], {
+//     easing: theme.transitions.easing.sharp,
+//     duration: theme.transitions.duration.leavingScreen,
+//   }),
+//   ...(open && {
+//     marginLeft: drawerWidth,
+//     width: `calc(100% - ${drawerWidth}px)`,
+//     transition: theme.transitions.create(["width", "margin"], {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   }),
+// }));
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -145,94 +146,94 @@ export default function Navbar(props) {
   };
 
   // ITEM ICONS SEBELAH KANAN
-  const [anchorel, setanchorel] = React.useState(null);
-  const [mobileMoreanchorel, setMobileMoreanchorel] = React.useState(null);
+  // const [anchorel, setanchorel] = React.useState(null);
+  // const [mobileMoreanchorel, setMobileMoreanchorel] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorel);
-  const isMobileMenuOpen = Boolean(mobileMoreanchorel);
+  // const isMenuOpen = Boolean(anchorel);
+  // const isMobileMenuOpen = Boolean(mobileMoreanchorel);
 
-  const handleProfileMenuOpen = (event) => {
-    setanchorel(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = (event) => {
+  //   setanchorel(event.currentTarget);
+  // };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreanchorel(null);
-  };
+  // const handleMobileMenuClose = () => {
+  //   setMobileMoreanchorel(null);
+  // };
 
-  const handleMenuClose = () => {
-    setanchorel(null);
-    handleMobileMenuClose();
-  };
+  // const handleMenuClose = () => {
+  //   setanchorel(null);
+  //   handleMobileMenuClose();
+  // };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreanchorel(event.currentTarget);
-  };
+  // const handleMobileMenuOpen = (event) => {
+  //   setMobileMoreanchorel(event.currentTarget);
+  // };
 
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorel={anchorel}
-      anchororigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepmounted="true"
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Keluar</MenuItem>
-    </Menu>
-  );
+  // const menuId = "primary-search-account-menu";
+  // const renderMenu = (
+  //   <Menu
+  //     anchorel={anchorel}
+  //     anchororigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     id={menuId}
+  //     keepmounted="true"
+  //     transformOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     open={isMenuOpen}
+  //     onClose={handleMenuClose}
+  //   >
+  //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+  //     <MenuItem onClick={handleMenuClose}>Keluar</MenuItem>
+  //   </Menu>
+  // );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorel={mobileMoreanchorel}
-      anchororigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepmounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={5} color="error">
-            <Notifications />
-          </Badge>
-        </IconButton>
-        <p>Notifikasi</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+  // const mobileMenuId = "primary-search-account-menu-mobile";
+  // const renderMobileMenu = (
+  //   <Menu
+  //     anchorel={mobileMoreanchorel}
+  //     anchororigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     id={mobileMenuId}
+  //     keepmounted
+  //     transformOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     open={isMobileMenuOpen}
+  //     onClose={handleMobileMenuClose}
+  //   >
+  //     <MenuItem>
+  //       <IconButton
+  //         size="large"
+  //         aria-label="show 17 new notifications"
+  //         color="inherit"
+  //       >
+  //         <Badge badgeContent={5} color="error">
+  //           <Notifications />
+  //         </Badge>
+  //       </IconButton>
+  //       <p>Notifikasi</p>
+  //     </MenuItem>
+  //     <MenuItem onClick={handleProfileMenuOpen}>
+  //       <IconButton
+  //         size="large"
+  //         aria-label="account of current user"
+  //         aria-controls="primary-search-account-menu"
+  //         aria-haspopup="true"
+  //         color="inherit"
+  //       >
+  //         <AccountCircle />
+  //       </IconButton>
+  //       <p>Profile</p>
+  //     </MenuItem>
+  //   </Menu>
+  // );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -273,9 +274,9 @@ export default function Navbar(props) {
               size="large"
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
+              // aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              // onClick={handleProfileMenuOpen}
               color="inherit"
             >
               <AccountCircle />
@@ -285,18 +286,16 @@ export default function Navbar(props) {
             <IconButton
               size="large"
               aria-label="show more"
-              aria-controls={mobileMenuId}
+              // aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              // onClick={handleMobileMenuOpen}
               color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+            ></IconButton>
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      {/* {renderMobileMenu}
+      {renderMenu} */}
 
       {/* LEFTBAR */}
       <Drawer variant="permanent" open={open}>
