@@ -1,7 +1,7 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function Nota() {
+export default function Nota(props) {
   return (
     <Card sx={{ width: 600, margin: "auto" }} elevation={10}>
       <CardContent>

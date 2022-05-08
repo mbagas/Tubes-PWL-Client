@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import DataTable from "react-data-table-component";
-import _ from "lodash";
 import { FilterComponent, Navbar } from "../../components";
 import { useNavigate } from "react-router-dom";
+import _ from "lodash";
 import axios from "axios";
 import Swal from "sweetalert2";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import ReceiptIcon from "@mui/icons-material/Receipt";
 import { Typography } from "@mui/material";
+import moment from "moment";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 
-const User = () => {
-  const navigate = useNavigate();
-
+const Transaksi = () => {
   const customStyles = {
     rows: {
       style: {
@@ -38,19 +38,28 @@ const User = () => {
 
   const columns = [
     {
-      name: "Name",
-      selector: "name",
+      name: "Total Harga",
+
+      selector: "total_harga",
       sortable: true,
     },
     {
-      name: "Email",
-      selector: "email",
+      name: "Uang bayar",
+
+      selector: "uang_bayar",
       sortable: true,
     },
     {
-      name: "Role",
-      selector: "role",
-      cell: (row) => row.roles.role,
+      name: "Uang Kembali",
+
+      selector: "uang_kembali",
+      sortable: true,
+    },
+    {
+      name: "Waktu Transaksi",
+
+      selector: "Waktu Transaksi",
+      cell: (row) => moment(row.created_at).format("DD/MM/YYYY, h:mm:ss"),
       sortable: true,
     },
     {
@@ -58,12 +67,12 @@ const User = () => {
         row.id ? (
           <Button
             variant="contained"
-            startIcon={<EditIcon />}
+            startIcon={<ReceiptIcon />}
             onClick={() => {
-              navigate("/user/edit/" + row.id);
+              navigate("/transaksi/edit/" + row.id);
             }}
           >
-            Edit
+            Cetak Nota
           </Button>
         ) : (
           console.log("gagal")
@@ -76,7 +85,7 @@ const User = () => {
             variant="outlined"
             color="error"
             startIcon={<DeleteIcon />}
-            onClick={() => deleteUser(row.id)}
+            onClick={() => deleteTransaksi(row.id)}
           >
             Delete
           </Button>
@@ -85,29 +94,27 @@ const User = () => {
         ),
     },
   ];
-
-  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  const [transaksi, setTransaksi] = useState([]);
 
   const token = localStorage.getItem("token");
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-  const fetchUsers = async () => {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    await axios.get("http://127.0.0.1:8000/api/user").then((response) => {
-      setUser({ users: response.data });
-      console.log(user);
+  const fetchTransaksi = async () => {
+    await axios.get("http://localhost:8000/api/transaksi").then((response) => {
+      setTransaksi(response.data);
+      console.log(transaksi);
     });
   };
-  console.log(token);
+
   useEffect(() => {
     if (!token) {
-      //redirect login page
       navigate("/");
     }
-
-    fetchUsers();
+    fetchTransaksi();
   }, []);
 
-  const deleteUser = async (id) => {
+  const deleteTransaksi = async (id) => {
     const isConfirm = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -125,13 +132,13 @@ const User = () => {
     }
 
     await axios
-      .delete(`http://localhost:8000/api/user/${id}`)
+      .delete(`http://localhost:8000/api/transaksi/${id}`)
       .then(({ data }) => {
         Swal.fire({
           icon: "success",
           text: data.message,
         });
-        fetchUsers();
+        fetchTransaksi();
       })
       .catch(({ response: { data } }) => {
         Swal.fire({
@@ -145,28 +152,30 @@ const User = () => {
   const [resetPaginationToggle, setResetPaginationToggle] =
     React.useState(false);
   const filteredItems = _.filter(
-    user.users,
+    transaksi.transaksis,
     (item) =>
-      item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
+      item.created_at &&
+      item.created_at.toLowerCase().includes(filterText.toLowerCase())
   );
 
   const tableData = {
     columns,
     data: filteredItems,
   };
+
   return (
     <Navbar>
-      <Typography variant="h4">User</Typography>
+      <Typography variant="h4">Transaksi</Typography>
       <Button
         variant="contained"
         onClick={() => {
-          navigate("/user/create");
+          navigate("/transaksi/create");
         }}
         sx={{
           mb: 2,
         }}
       >
-        Create User
+        Create Transaksi
       </Button>
       <DataTableExtensions {...tableData}>
         <DataTable
@@ -180,4 +189,5 @@ const User = () => {
     </Navbar>
   );
 };
-export default User;
+
+export default Transaksi;

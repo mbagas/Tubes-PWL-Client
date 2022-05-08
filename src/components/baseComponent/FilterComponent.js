@@ -7,7 +7,7 @@ const FilterComponent = ({ filterText, onFilter }) => (
     <TextField
       id="search"
       type="text"
-      placeholder="Filter By Name"
+      placeholder="Filter"
       aria-label="Search Input"
       value={filterText}
       onChange={onFilter}

@@ -12,7 +12,7 @@ import { Typography } from "@mui/material";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 
-const User = () => {
+const Produk = () => {
   const navigate = useNavigate();
 
   const customStyles = {
@@ -38,19 +38,13 @@ const User = () => {
 
   const columns = [
     {
-      name: "Name",
-      selector: "name",
+      name: "Nama Produk",
+      selector: "nama_produk",
       sortable: true,
     },
     {
-      name: "Email",
-      selector: "email",
-      sortable: true,
-    },
-    {
-      name: "Role",
-      selector: "role",
-      cell: (row) => row.roles.role,
+      name: "Harga",
+      selector: "harga",
       sortable: true,
     },
     {
@@ -60,7 +54,7 @@ const User = () => {
             variant="contained"
             startIcon={<EditIcon />}
             onClick={() => {
-              navigate("/user/edit/" + row.id);
+              navigate("/produk/edit/" + row.id);
             }}
           >
             Edit
@@ -76,7 +70,7 @@ const User = () => {
             variant="outlined"
             color="error"
             startIcon={<DeleteIcon />}
-            onClick={() => deleteUser(row.id)}
+            onClick={() => deleteProduk(row.id)}
           >
             Delete
           </Button>
@@ -86,28 +80,29 @@ const User = () => {
     },
   ];
 
-  const [user, setUser] = useState({});
+  const [produk, setProduk] = useState({});
 
   const token = localStorage.getItem("token");
 
-  const fetchUsers = async () => {
+  const fetchProduk = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    await axios.get("http://127.0.0.1:8000/api/user").then((response) => {
-      setUser({ users: response.data });
-      console.log(user);
+    await axios.get("http://127.0.0.1:8000/api/produk").then((response) => {
+      console.log(response.data);
+      setProduk(response.data);
+      console.log(produk);
     });
   };
-  console.log(token);
+
   useEffect(() => {
     if (!token) {
       //redirect login page
       navigate("/");
     }
 
-    fetchUsers();
+    fetchProduk();
   }, []);
 
-  const deleteUser = async (id) => {
+  const deleteProduk = async (id) => {
     const isConfirm = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -125,13 +120,13 @@ const User = () => {
     }
 
     await axios
-      .delete(`http://localhost:8000/api/user/${id}`)
+      .delete(`http://localhost:8000/api/produk/${id}`)
       .then(({ data }) => {
         Swal.fire({
           icon: "success",
           text: data.message,
         });
-        fetchUsers();
+        fetchProduk();
       })
       .catch(({ response: { data } }) => {
         Swal.fire({
@@ -145,28 +140,30 @@ const User = () => {
   const [resetPaginationToggle, setResetPaginationToggle] =
     React.useState(false);
   const filteredItems = _.filter(
-    user.users,
+    produk.produks,
     (item) =>
-      item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
+      item.nama_produk &&
+      item.nama_produk.toLowerCase().includes(filterText.toLowerCase())
   );
 
   const tableData = {
     columns,
     data: filteredItems,
   };
+
   return (
     <Navbar>
-      <Typography variant="h4">User</Typography>
+      <Typography variant="h4">produk</Typography>
       <Button
         variant="contained"
         onClick={() => {
-          navigate("/user/create");
+          navigate("/produk/create");
         }}
         sx={{
           mb: 2,
         }}
       >
-        Create User
+        Create produk
       </Button>
       <DataTableExtensions {...tableData}>
         <DataTable
@@ -180,4 +177,4 @@ const User = () => {
     </Navbar>
   );
 };
-export default User;
+export default Produk;

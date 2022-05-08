@@ -9,10 +9,12 @@ import Swal from "sweetalert2";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Typography } from "@mui/material";
-import DataTableExtensions from "react-data-table-component-extensions";
-import "react-data-table-component-extensions/dist/index.css";
 
-const User = () => {
+const Dashboard = () => {
+  const handleButtonClick = (id) => {
+    console.log("clicked");
+  };
+
   const navigate = useNavigate();
 
   const customStyles = {
@@ -39,18 +41,17 @@ const User = () => {
   const columns = [
     {
       name: "Name",
-      selector: "name",
+      selector: (row) => row.name,
       sortable: true,
     },
     {
       name: "Email",
-      selector: "email",
+      selector: (row) => row.email,
       sortable: true,
     },
     {
       name: "Role",
-      selector: "role",
-      cell: (row) => row.roles.role,
+      selector: (row) => row.roles.role,
       sortable: true,
     },
     {
@@ -60,6 +61,7 @@ const User = () => {
             variant="contained"
             startIcon={<EditIcon />}
             onClick={() => {
+              handleButtonClick(row.id);
               navigate("/user/edit/" + row.id);
             }}
           >
@@ -76,7 +78,7 @@ const User = () => {
             variant="outlined"
             color="error"
             startIcon={<DeleteIcon />}
-            onClick={() => deleteUser(row.id)}
+            onClick={() => deleteProduct(row.id)}
           >
             Delete
           </Button>
@@ -97,7 +99,7 @@ const User = () => {
       console.log(user);
     });
   };
-  console.log(token);
+
   useEffect(() => {
     if (!token) {
       //redirect login page
@@ -107,7 +109,7 @@ const User = () => {
     fetchUsers();
   }, []);
 
-  const deleteUser = async (id) => {
+  const deleteProduct = async (id) => {
     const isConfirm = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -150,10 +152,22 @@ const User = () => {
       item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
   );
 
-  const tableData = {
-    columns,
-    data: filteredItems,
-  };
+  const subHeaderComponentMemo = React.useMemo(() => {
+    const handleClear = () => {
+      if (filterText) {
+        setResetPaginationToggle(!resetPaginationToggle);
+        setFilterText("");
+      }
+    };
+
+    return (
+      <FilterComponent
+        onFilter={(e) => setFilterText(e.target.value)}
+        onClear={handleClear}
+        filterText={filterText}
+      />
+    );
+  }, [filterText, resetPaginationToggle]);
   return (
     <Navbar>
       <Typography variant="h4">User</Typography>
@@ -162,22 +176,19 @@ const User = () => {
         onClick={() => {
           navigate("/user/create");
         }}
-        sx={{
-          mb: 2,
-        }}
       >
         Create User
       </Button>
-      <DataTableExtensions {...tableData}>
-        <DataTable
-          data={filteredItems}
-          pagination
-          paginationResetDefaultPage={resetPaginationToggle}
-          columns={columns}
-          customStyles={customStyles}
-        />
-      </DataTableExtensions>
+      <DataTable
+        data={filteredItems}
+        pagination
+        paginationResetDefaultPage={resetPaginationToggle}
+        columns={columns}
+        customStyles={customStyles}
+        subHeader
+        subHeaderComponent={subHeaderComponentMemo}
+      />
     </Navbar>
   );
 };
-export default User;
+export default Dashboard;
