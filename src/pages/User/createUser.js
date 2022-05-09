@@ -91,7 +91,7 @@ const CreateUser = () => {
         >
           <FormControl variant="standard">
             <Typography variant="h5" gutterBottom>
-              Edit User
+              Create User
             </Typography>
             <Grid item xs={12}>
               <TextField

@@ -10,6 +10,7 @@ import CreateProduk from "./Produk/createProduk.js";
 import UpdateProduk from "./Produk/updateProduk.js";
 import Transaksi from "./Transaksi/index.js";
 import CreateTransaksi from "./Transaksi/createTransaksi.js";
+import DetailTransaksi from "./Transaksi/detailTransaksi.js";
 
 export { Login };
 export { Logout };
@@ -17,4 +18,4 @@ export { NoMatch };
 export { Dashboard };
 export { User, CreateUser, UpdateUser };
 export { Produk, CreateProduk, UpdateProduk };
-export { Transaksi, CreateTransaksi };
+export { Transaksi, CreateTransaksi, DetailTransaksi };

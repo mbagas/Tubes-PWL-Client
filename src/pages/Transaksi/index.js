@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import DataTable from "react-data-table-component";
-import { FilterComponent, Navbar } from "../../components";
+import { FilterComponent, Navbar, Nota } from "../../components";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import axios from "axios";
@@ -13,6 +13,7 @@ import { Typography } from "@mui/material";
 import moment from "moment";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
+import { useReactToPrint } from "react-to-print";
 
 const Transaksi = () => {
   const customStyles = {
@@ -52,7 +53,10 @@ const Transaksi = () => {
     {
       name: "Uang Kembali",
 
-      selector: "uang_kembali",
+      selector: `uang_kembali`,
+      cell: (row) => {
+        return row.uang_kembali;
+      },
       sortable: true,
     },
     {
@@ -68,9 +72,7 @@ const Transaksi = () => {
           <Button
             variant="contained"
             startIcon={<ReceiptIcon />}
-            onClick={() => {
-              navigate("/transaksi/edit/" + row.id);
-            }}
+            onClick={() => navigate(`/transaksi/detail/${row.id}`)}
           >
             Cetak Nota
           </Button>
@@ -113,6 +115,11 @@ const Transaksi = () => {
     }
     fetchTransaksi();
   }, []);
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => Nota,
+  });
 
   const deleteTransaksi = async (id) => {
     const isConfirm = await Swal.fire({

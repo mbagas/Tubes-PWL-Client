@@ -14,6 +14,7 @@ import {
   UpdateProduk,
   Transaksi,
   CreateTransaksi,
+  DetailTransaksi,
 } from "../pages";
 
 import Protected from "./protected";
@@ -100,6 +101,14 @@ function Apps() {
           element={
             <Protected>
               <CreateTransaksi />
+            </Protected>
+          }
+        />
+        <Route
+          path="/transaksi/detail/:id"
+          element={
+            <Protected>
+              <DetailTransaksi />
             </Protected>
           }
         />
