@@ -1,0 +1,21 @@
+import Login from "./Login.js";
+import Logout from "./Logout.js";
+import NoMatch from "./404/index.js";
+import User from "./User/";
+import CreateUser from "./User/createUser.js";
+import UpdateUser from "./User/updateUser.js";
+import Dashboard from "./Dashboard/index.js";
+import Produk from "./Produk/index.js";
+import CreateProduk from "./Produk/createProduk.js";
+import UpdateProduk from "./Produk/updateProduk.js";
+import Transaksi from "./Transaksi/index.js";
+import CreateTransaksi from "./Transaksi/createTransaksi.js";
+import DetailTransaksi from "./Transaksi/detailTransaksi.js";
+
+export { Login };
+export { Logout };
+export { NoMatch };
+export { Dashboard };
+export { User, CreateUser, UpdateUser };
+export { Produk, CreateProduk, UpdateProduk };
+export { Transaksi, CreateTransaksi, DetailTransaksi };
