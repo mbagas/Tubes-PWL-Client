@@ -67,7 +67,10 @@ export default function Grafik() {
     }
     fetchGrafikTransaksi();
   }, []);
-  const labels = _.map(grafikTransaksi.grafikTransaksi, (item) => item.bulan);
+  const labels = _.map(
+    grafikTransaksi.grafikTransaksi,
+    (item) => item.bulan + " " + item.year
+  );
   const data = {
     labels,
     datasets: [
