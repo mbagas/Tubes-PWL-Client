@@ -40,6 +40,11 @@ const DetailTransaksi = () => {
         variant="contained"
         startIcon={<ReceiptIcon />}
         onClick={handlePrint}
+        sx={{
+          my: "3rem",
+          mx: "46%",
+          alignSelf: "center",
+        }}
       >
         Cetak Nota
       </Button>

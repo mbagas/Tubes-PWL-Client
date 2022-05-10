@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import DataTable from "react-data-table-component";
 import _ from "lodash";
-import { FilterComponent, Navbar } from "../../components";
+import { Navbar } from "../../components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";

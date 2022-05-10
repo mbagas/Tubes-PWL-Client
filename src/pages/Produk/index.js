@@ -36,49 +36,71 @@ const Produk = () => {
     },
   };
 
-  const columns = [
-    {
-      name: "Nama Produk",
-      selector: "nama_produk",
-      sortable: true,
-    },
-    {
-      name: "Harga",
-      selector: "harga",
-      sortable: true,
-    },
-    {
-      cell: (row) =>
-        row.id ? (
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            onClick={() => {
-              navigate("/produk/edit/" + row.id);
-            }}
-          >
-            Edit
-          </Button>
-        ) : (
-          console.log("gagal")
-        ),
-    },
-    {
-      cell: (row) =>
-        row.id ? (
-          <Button
-            variant="outlined"
-            color="error"
-            startIcon={<DeleteIcon />}
-            onClick={() => deleteProduk(row.id)}
-          >
-            Delete
-          </Button>
-        ) : (
-          console.log("gagal")
-        ),
-    },
-  ];
+  let role = "";
+  if (localStorage.getItem("token")) {
+    if (localStorage.getItem("role")) {
+      role = localStorage.getItem("role");
+    }
+  }
+  let columns = [];
+  if (role == 1) {
+    columns = [
+      {
+        name: "Nama Produk",
+        selector: "nama_produk",
+        sortable: true,
+      },
+      {
+        name: "Harga",
+        selector: "harga",
+        sortable: true,
+      },
+      {
+        cell: (row) =>
+          row.id ? (
+            <Button
+              variant="contained"
+              startIcon={<EditIcon />}
+              onClick={() => {
+                navigate("/produk/edit/" + row.id);
+              }}
+            >
+              Edit
+            </Button>
+          ) : (
+            console.log("gagal")
+          ),
+      },
+      {
+        cell: (row) =>
+          row.id ? (
+            <Button
+              variant="outlined"
+              color="error"
+              startIcon={<DeleteIcon />}
+              onClick={() => deleteProduk(row.id)}
+            >
+              Delete
+            </Button>
+          ) : (
+            console.log("gagal")
+          ),
+      },
+    ];
+  } else {
+    columns = [
+      {
+        name: "Nama Produk",
+        selector: "nama_produk",
+        sortable: true,
+      },
+      {
+        name: "Harga",
+        selector: "harga",
+        sortable: true,
+      },
+    ];
+  }
 
   const [produk, setProduk] = useState({});
 
@@ -154,17 +176,20 @@ const Produk = () => {
   return (
     <Navbar>
       <Typography variant="h4">produk</Typography>
-      <Button
-        variant="contained"
-        onClick={() => {
-          navigate("/produk/create");
-        }}
-        sx={{
-          mb: 2,
-        }}
-      >
-        Create produk
-      </Button>
+      {role == 1 ? (
+        <Button
+          variant="contained"
+          onClick={() => {
+            navigate("/produk/create");
+          }}
+          sx={{
+            mb: 2,
+          }}
+        >
+          Create produk
+        </Button>
+      ) : null}
+
       <DataTableExtensions {...tableData}>
         <DataTable
           data={filteredItems}

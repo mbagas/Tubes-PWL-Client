@@ -10,6 +10,7 @@ const Logout = () => {
     if (token) {
       await axios.post("http://127.0.0.1:8000/api/logout").then((response) => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         navigate("/");
       });
     }
