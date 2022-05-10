@@ -103,33 +103,65 @@ const Drawer = styled(MuiDrawer, {
 // END THEME STYLE
 
 // LIST ITEM MENU KIRI
-const ListMenu = [
-  {
-    text: "Beranda",
-    icon: <Home />,
-    path: "/",
-  },
-  {
-    text: "Produk",
-    icon: <RestaurantMenu />,
-    path: "/produk",
-  },
-  {
-    text: "Transaksi",
-    icon: <ShoppingCart />,
-    path: "/transaksi",
-  },
-  {
-    text: "Data Pegawai",
-    icon: <Group />,
-    path: "/user",
-  },
-  {
-    text: "Logout",
-    icon: <Logout />,
-    path: "/logout",
-  },
-];
+let role = "";
+if (localStorage.getItem("token")) {
+  if (localStorage.getItem("role")) {
+    role = localStorage.getItem("role");
+  }
+}
+let ListMenu = [];
+if (role == 1) {
+  ListMenu = [
+    {
+      text: "Beranda",
+      icon: <Home />,
+      path: "/",
+    },
+    {
+      text: "Produk",
+      icon: <RestaurantMenu />,
+      path: "/produk",
+    },
+    {
+      text: "Transaksi",
+      icon: <ShoppingCart />,
+      path: "/transaksi",
+    },
+    {
+      text: "Data Pegawai",
+      icon: <Group />,
+      path: "/user",
+    },
+    {
+      text: "Logout",
+      icon: <Logout />,
+      path: "/logout",
+    },
+  ];
+} else {
+  ListMenu = [
+    {
+      text: "Beranda",
+      icon: <Home />,
+      path: "/",
+    },
+    {
+      text: "Produk",
+      icon: <RestaurantMenu />,
+      path: "/produk",
+    },
+    {
+      text: "Transaksi",
+      icon: <ShoppingCart />,
+      path: "/transaksi",
+    },
+    {
+      text: "Logout",
+      icon: <Logout />,
+      path: "/logout",
+    },
+  ];
+}
 
 // MAIN
 export default function Navbar(props) {
@@ -143,96 +175,6 @@ export default function Navbar(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  // ITEM ICONS SEBELAH KANAN
-  // const [anchorel, setanchorel] = React.useState(null);
-  // const [mobileMoreanchorel, setMobileMoreanchorel] = React.useState(null);
-
-  // const isMenuOpen = Boolean(anchorel);
-  // const isMobileMenuOpen = Boolean(mobileMoreanchorel);
-
-  // const handleProfileMenuOpen = (event) => {
-  //   setanchorel(event.currentTarget);
-  // };
-
-  // const handleMobileMenuClose = () => {
-  //   setMobileMoreanchorel(null);
-  // };
-
-  // const handleMenuClose = () => {
-  //   setanchorel(null);
-  //   handleMobileMenuClose();
-  // };
-
-  // const handleMobileMenuOpen = (event) => {
-  //   setMobileMoreanchorel(event.currentTarget);
-  // };
-
-  // const menuId = "primary-search-account-menu";
-  // const renderMenu = (
-  //   <Menu
-  //     anchorel={anchorel}
-  //     anchororigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     id={menuId}
-  //     keepmounted="true"
-  //     transformOrigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     open={isMenuOpen}
-  //     onClose={handleMenuClose}
-  //   >
-  //     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-  //     <MenuItem onClick={handleMenuClose}>Keluar</MenuItem>
-  //   </Menu>
-  // );
-
-  // const mobileMenuId = "primary-search-account-menu-mobile";
-  // const renderMobileMenu = (
-  //   <Menu
-  //     anchorel={mobileMoreanchorel}
-  //     anchororigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     id={mobileMenuId}
-  //     keepmounted
-  //     transformOrigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     open={isMobileMenuOpen}
-  //     onClose={handleMobileMenuClose}
-  //   >
-  //     <MenuItem>
-  //       <IconButton
-  //         size="large"
-  //         aria-label="show 17 new notifications"
-  //         color="inherit"
-  //       >
-  //         <Badge badgeContent={5} color="error">
-  //           <Notifications />
-  //         </Badge>
-  //       </IconButton>
-  //       <p>Notifikasi</p>
-  //     </MenuItem>
-  //     <MenuItem onClick={handleProfileMenuOpen}>
-  //       <IconButton
-  //         size="large"
-  //         aria-label="account of current user"
-  //         aria-controls="primary-search-account-menu"
-  //         aria-haspopup="true"
-  //         color="inherit"
-  //       >
-  //         <AccountCircle />
-  //       </IconButton>
-  //       <p>Profile</p>
-  //     </MenuItem>
-  //   </Menu>
-  // );
 
   return (
     <Box sx={{ display: "flex" }}>

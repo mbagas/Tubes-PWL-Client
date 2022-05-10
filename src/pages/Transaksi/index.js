@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import DataTable from "react-data-table-component";
-import { FilterComponent, Navbar, Nota } from "../../components";
+import { Navbar, Nota } from "../../components";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import axios from "axios";
 import Swal from "sweetalert2";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import { Typography } from "@mui/material";
 import moment from "moment";
@@ -37,65 +36,119 @@ const Transaksi = () => {
     },
   };
 
-  const columns = [
-    {
-      name: "Total Harga",
+  let role = "";
+  if (localStorage.getItem("token")) {
+    if (localStorage.getItem("role")) {
+      role = localStorage.getItem("role");
+    }
+  }
+  let columns = [];
+  if (role == 1) {
+    columns = [
+      {
+        name: "Total Harga",
 
-      selector: "total_harga",
-      sortable: true,
-    },
-    {
-      name: "Uang bayar",
-
-      selector: "uang_bayar",
-      sortable: true,
-    },
-    {
-      name: "Uang Kembali",
-
-      selector: `uang_kembali`,
-      cell: (row) => {
-        return row.uang_kembali;
+        selector: "total_harga",
+        sortable: true,
       },
-      sortable: true,
-    },
-    {
-      name: "Waktu Transaksi",
+      {
+        name: "Uang bayar",
 
-      selector: "Waktu Transaksi",
-      cell: (row) => moment(row.created_at).format("DD/MM/YYYY, h:mm:ss"),
-      sortable: true,
-    },
-    {
-      cell: (row) =>
-        row.id ? (
-          <Button
-            variant="contained"
-            startIcon={<ReceiptIcon />}
-            onClick={() => navigate(`/transaksi/detail/${row.id}`)}
-          >
-            Cetak Nota
-          </Button>
-        ) : (
-          console.log("gagal")
-        ),
-    },
-    {
-      cell: (row) =>
-        row.id ? (
-          <Button
-            variant="outlined"
-            color="error"
-            startIcon={<DeleteIcon />}
-            onClick={() => deleteTransaksi(row.id)}
-          >
-            Delete
-          </Button>
-        ) : (
-          console.log("gagal")
-        ),
-    },
-  ];
+        selector: "uang_bayar",
+        sortable: true,
+      },
+      {
+        name: "Uang Kembali",
+
+        selector: `uang_kembali`,
+        cell: (row) => {
+          return row.uang_kembali;
+        },
+        sortable: true,
+      },
+      {
+        name: "Waktu Transaksi",
+
+        selector: "Waktu Transaksi",
+        cell: (row) => moment(row.created_at).format("DD/MM/YYYY, h:mm:ss"),
+        sortable: true,
+      },
+      {
+        cell: (row) =>
+          row.id ? (
+            <Button
+              variant="contained"
+              startIcon={<ReceiptIcon />}
+              onClick={() => navigate(`/transaksi/detail/${row.id}`)}
+            >
+              Cetak Nota
+            </Button>
+          ) : (
+            console.log("gagal")
+          ),
+      },
+      {
+        cell: (row) =>
+          row.id ? (
+            <Button
+              variant="outlined"
+              color="error"
+              startIcon={<DeleteIcon />}
+              onClick={() => deleteTransaksi(row.id)}
+            >
+              Delete
+            </Button>
+          ) : (
+            console.log("gagal")
+          ),
+      },
+    ];
+  } else {
+    columns = [
+      {
+        name: "Total Harga",
+
+        selector: "total_harga",
+        sortable: true,
+      },
+      {
+        name: "Uang bayar",
+
+        selector: "uang_bayar",
+        sortable: true,
+      },
+      {
+        name: "Uang Kembali",
+
+        selector: `uang_kembali`,
+        cell: (row) => {
+          return row.uang_kembali;
+        },
+        sortable: true,
+      },
+      {
+        name: "Waktu Transaksi",
+
+        selector: "Waktu Transaksi",
+        cell: (row) => moment(row.created_at).format("DD/MM/YYYY, h:mm:ss"),
+        sortable: true,
+      },
+      {
+        cell: (row) =>
+          row.id ? (
+            <Button
+              variant="contained"
+              startIcon={<ReceiptIcon />}
+              onClick={() => navigate(`/transaksi/detail/${row.id}`)}
+            >
+              Cetak Nota
+            </Button>
+          ) : (
+            console.log("gagal")
+          ),
+      },
+    ];
+  }
   const navigate = useNavigate();
   const [transaksi, setTransaksi] = useState([]);
 

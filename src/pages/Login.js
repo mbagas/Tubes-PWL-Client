@@ -62,9 +62,8 @@ export default function Login() {
     axios
       .post("http://localhost:8000/api/login", values)
       .then((response) => {
-        console.log(response);
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", response.data.user);
+        localStorage.setItem("role", response.data.user.role_id);
         navigate("/dashboard");
       })
       .catch((error) => {
