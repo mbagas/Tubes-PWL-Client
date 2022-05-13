@@ -96,7 +96,7 @@ export default function Login() {
                 {/* <LockOutlinedIcon /> */}
               </Avatar>
               <Typography component="h1" variant="h5">
-                Selamat Datang
+                Selamat Datang di Waroeng Makan
               </Typography>
               <Box
                 component="form"
