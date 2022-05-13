@@ -92,10 +92,12 @@ const User = () => {
 
   const fetchUsers = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    await axios.get("http://127.0.0.1:8000/api/user").then((response) => {
-      setUser({ users: response.data });
-      console.log(user);
-    });
+    await axios
+      .get("https://waroengmakan.herokuapp.com/api/user")
+      .then((response) => {
+        setUser({ users: response.data });
+        console.log(user);
+      });
   };
   console.log(token);
   useEffect(() => {

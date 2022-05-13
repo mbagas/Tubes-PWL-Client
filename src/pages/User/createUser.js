@@ -30,9 +30,11 @@ const CreateUser = () => {
   const navigate = useNavigate();
   const [role, setRole] = useState([]);
   const fetchRole = async () => {
-    await axios.get("http://127.0.0.1:8000/api/role").then((response) => {
-      setRole(response.data);
-    });
+    await axios
+      .get("https://waroengmakan.herokuapp.com/api/role")
+      .then((response) => {
+        setRole(response.data);
+      });
   };
 
   const token = localStorage.getItem("token");
@@ -58,7 +60,7 @@ const CreateUser = () => {
       console.log(values);
 
       axios
-        .post("http://127.0.0.1:8000/api/user", values)
+        .post("https://waroengmakan.herokuapp.com/api/user", values)
         .then((response) => {
           console.log(response);
           Swal.fire({

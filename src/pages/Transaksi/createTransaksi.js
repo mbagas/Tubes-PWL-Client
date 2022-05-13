@@ -41,9 +41,11 @@ const CreateTransaksi = () => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
   const fetchProduk = async () => {
-    await axios.get("http://127.0.0.1:8000/api/produk").then((response) => {
-      setProduk(response.data);
-    });
+    await axios
+      .get("https://waroengmakan.herokuapp.com/api/produk")
+      .then((response) => {
+        setProduk(response.data);
+      });
   };
 
   useEffect(() => {
@@ -119,7 +121,7 @@ const CreateTransaksi = () => {
     });
 
     axios
-      .post("http://127.0.0.1:8000/api/transaksi", transaksi)
+      .post("https://waroengmakan.herokuapp.com/api/transaksi", transaksi)
       .then((response) => {
         console.log(response.data);
         Swal.fire({

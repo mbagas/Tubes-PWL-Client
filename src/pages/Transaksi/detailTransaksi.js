@@ -16,7 +16,7 @@ const DetailTransaksi = () => {
   //   const fetchTransaksi = async () => {
   //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   //     await axios
-  //       .get(`http://localhost:8000/api/transaksi/${id}`)
+  //       .get(`https://waroengmakan.herokuapp.com/api/transaksi/${id}`)
   //       .then((response) => {
   //         setTransaksi(response.data);
   //         console.log(transaksi);

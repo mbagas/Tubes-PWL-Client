@@ -60,7 +60,7 @@ export default function Login() {
     values.password = data.get("password");
 
     axios
-      .post("http://localhost:8000/api/login", values)
+      .post("https://waroengmakan.herokuapp.com/api/login", values)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.user.role_id);

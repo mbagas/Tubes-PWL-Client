@@ -156,10 +156,12 @@ const Transaksi = () => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
   const fetchTransaksi = async () => {
-    await axios.get("http://localhost:8000/api/transaksi").then((response) => {
-      setTransaksi(response.data);
-      console.log(transaksi);
-    });
+    await axios
+      .get("https://waroengmakan.herokuapp.com/api/transaksi")
+      .then((response) => {
+        setTransaksi(response.data);
+        console.log(transaksi);
+      });
   };
 
   useEffect(() => {
@@ -192,7 +194,7 @@ const Transaksi = () => {
     }
 
     await axios
-      .delete(`http://localhost:8000/api/transaksi/${id}`)
+      .delete(`https://waroengmakan.herokuapp.com/api/transaksi/${id}`)
       .then(({ data }) => {
         Swal.fire({
           icon: "success",

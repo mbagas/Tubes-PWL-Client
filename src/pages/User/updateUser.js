@@ -33,15 +33,19 @@ const UpdateUser = () => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
   const fetchUsers = async () => {
-    await axios.get(`http://127.0.0.1:8000/api/user/${id}`).then((response) => {
-      setUser(response.data);
-    });
+    await axios
+      .get(`https://waroengmakan.herokuapp.com/api/user/${id}`)
+      .then((response) => {
+        setUser(response.data);
+      });
   };
 
   const fetchRole = async () => {
-    await axios.get("http://127.0.0.1:8000/api/role").then((response) => {
-      setRole(response.data);
-    });
+    await axios
+      .get("https://waroengmakan.herokuapp.com/api/role")
+      .then((response) => {
+        setRole(response.data);
+      });
   };
 
   useEffect(() => {
@@ -69,7 +73,7 @@ const UpdateUser = () => {
       console.log(values);
 
       axios
-        .put(`http://127.0.0.1:8000/api/user/${id}`, values)
+        .put(`https://waroengmakan.herokuapp.com/api/user/${id}`, values)
         .then((response) => {
           console.log(response);
           Swal.fire({

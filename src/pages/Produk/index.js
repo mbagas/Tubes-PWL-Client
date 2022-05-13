@@ -142,7 +142,7 @@ const Produk = () => {
     }
 
     await axios
-      .delete(`http://localhost:8000/api/produk/${id}`)
+      .delete(`https://waroengmakan.herokuapp.com/api/produk/${id}`)
       .then(({ data }) => {
         Swal.fire({
           icon: "success",
