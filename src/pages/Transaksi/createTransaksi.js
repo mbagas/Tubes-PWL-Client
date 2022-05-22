@@ -110,31 +110,39 @@ const CreateTransaksi = () => {
 
   const transaksiSubmitHandler = (event) => {
     event.preventDefault();
-    setTransaksi({
-      ...transaksi,
-      data: pesanan.map((pesanan) => {
-        return {
-          produk_id: pesanan.produk_id,
-          jumlah: pesanan.jumlah,
-        };
-      }),
-    });
-
-    axios
-      .post("https://waroengmakan.herokuapp.com/api/transaksi", transaksi)
-      .then((response) => {
-        console.log(response.data);
-        Swal.fire({
-          title: "Transaksi Berhasil",
-          text: "Transaksi berhasil ditambahkan",
-          icon: "success",
-          confirmButtonText: "OK",
-        }).then((result) => {
-          if (result.value) {
-            navigate("/transaksi");
-          }
-        });
+    if (transaksi.uang_bayar < transaksi.total_harga) {
+      Swal.fire({
+        icon: "error",
+        title: "Uang Bayar Kurang",
+        text: "Uang bayar kurang dari total harga",
       });
+    } else {
+      setTransaksi({
+        ...transaksi,
+        data: pesanan.map((pesanan) => {
+          return {
+            produk_id: pesanan.produk_id,
+            jumlah: pesanan.jumlah,
+          };
+        }),
+      });
+
+      axios
+        .post("https://waroengmakan.herokuapp.com/api/transaksi", transaksi)
+        .then((response) => {
+          console.log(response.data);
+          Swal.fire({
+            title: "Transaksi Berhasil",
+            text: "Transaksi berhasil ditambahkan",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.value) {
+              navigate("/transaksi");
+            }
+          });
+        });
+    }
   };
 
   const customStyles = {
