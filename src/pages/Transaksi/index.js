@@ -13,6 +13,7 @@ import moment from "moment";
 import DataTableExtensions from "react-data-table-component-extensions";
 import "react-data-table-component-extensions/dist/index.css";
 import { useReactToPrint } from "react-to-print";
+import { VisibilityOutlined } from "@mui/icons-material";
 
 const Transaksi = () => {
   const customStyles = {
@@ -78,10 +79,11 @@ const Transaksi = () => {
           row.id ? (
             <Button
               variant="contained"
-              startIcon={<ReceiptIcon />}
+              startIcon={<VisibilityOutlined />}
               onClick={() => navigate(`/transaksi/detail/${row.id}`)}
+              sx={{bgcolor:'#22367E'}}
             >
-              Cetak Nota
+              lihat
             </Button>
           ) : (
             console.log("gagal")
@@ -138,15 +140,17 @@ const Transaksi = () => {
           row.id ? (
             <Button
               variant="contained"
-              startIcon={<ReceiptIcon />}
+              startIcon={<VisibilityOutlined />}
               onClick={() => navigate(`/transaksi/detail/${row.id}`)}
+              sx={{bgcolor:'#22367E'}}
             >
-              Cetak Nota
+              LIHAT
             </Button>
           ) : (
             console.log("gagal")
           ),
       },
+      
     ];
   }
   const navigate = useNavigate();
@@ -157,7 +161,7 @@ const Transaksi = () => {
 
   const fetchTransaksi = async () => {
     await axios
-      .get("https://waroengmakan.herokuapp.com/api/transaksi")
+      .get("http://127.0.0.1:8000/api/transaksi")
       .then((response) => {
         setTransaksi(response.data);
         console.log(transaksi);
@@ -194,7 +198,7 @@ const Transaksi = () => {
     }
 
     await axios
-      .delete(`https://waroengmakan.herokuapp.com/api/transaksi/${id}`)
+      .delete(`http://127.0.0.1:8000/api/transaksi/${id}`)
       .then(({ data }) => {
         Swal.fire({
           icon: "success",
@@ -234,7 +238,7 @@ const Transaksi = () => {
           navigate("/transaksi/create");
         }}
         sx={{
-          mb: 2,
+          mb: 2,bgcolor:'#495C83'
         }}
       >
         Create Transaksi

@@ -1,5 +1,5 @@
 {
-  "name": "tubes-pwl-client",
+  "name": "tubes-pti-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "react-moment": "^1.1.2",
     "react-number-format": "^4.9.3",
     "react-router-dom": "^6.3.0",
+    "react-script": "^2.0.5",
     "react-scripts": "5.0.1",
     "react-to-print": "^2.14.7",
     "styled-components": "^5.3.5",

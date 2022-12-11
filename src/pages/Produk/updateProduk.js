@@ -63,7 +63,7 @@ const UpdateUser = () => {
   const fetchProduk = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await axios
-      .get(`https://waroengmakan.herokuapp.com/api/produk/${id}`)
+      .get(`http://127.0.0.1:8000/api/produk/${id}`)
       .then((response) => {
         setProduk(response.data);
       });
@@ -90,7 +90,7 @@ const UpdateUser = () => {
       console.log(values);
 
       axios
-        .put(`https://waroengmakan.herokuapp.com/api/produk/${id}`, values)
+        .put(`http://127.0.0.1:8000/api/produk/${id}`, values)
         .then((response) => {
           console.log(response);
           Swal.fire({

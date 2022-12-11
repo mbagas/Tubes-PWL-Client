@@ -31,7 +31,7 @@ const CreateUser = () => {
   const [role, setRole] = useState([]);
   const fetchRole = async () => {
     await axios
-      .get("https://waroengmakan.herokuapp.com/api/role")
+      .get("http://127.0.0.1:8000/api/role")
       .then((response) => {
         setRole(response.data);
       });
@@ -60,7 +60,7 @@ const CreateUser = () => {
       console.log(values);
 
       axios
-        .post("https://waroengmakan.herokuapp.com/api/user", values)
+        .post("http://127.0.0.1:8000/api/user", values)
         .then((response) => {
           console.log(response);
           Swal.fire({

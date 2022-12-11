@@ -42,7 +42,7 @@ const CreateTransaksi = () => {
 
   const fetchProduk = async () => {
     await axios
-      .get("https://waroengmakan.herokuapp.com/api/produk")
+      .get("http://127.0.0.1:8000/api/produk")
       .then((response) => {
         setProduk(response.data);
       });
@@ -128,7 +128,7 @@ const CreateTransaksi = () => {
       });
 
       axios
-        .post("https://waroengmakan.herokuapp.com/api/transaksi", transaksi)
+        .post("http://127.0.0.1:8000/api/transaksi", transaksi)
         .then((response) => {
           console.log(response.data);
           Swal.fire({

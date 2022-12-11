@@ -1,5 +1,6 @@
 import React, { useState, forwardRef, useEffect } from "react";
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/system";
 import moment from "moment";
 import axios from "axios";
@@ -31,7 +32,7 @@ const Nota = forwardRef((props, ref) => {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       try {
         await axios
-          .get(`https://waroengmakan.herokuapp.com/api/transaksi/${props.id}`)
+          .get(`http://127.0.0.1:8000/api/transaksi/${props.id}`)
           .then((response) => {
             setTransaksi(response.data);
             console.log(transaksi);
@@ -48,8 +49,10 @@ const Nota = forwardRef((props, ref) => {
     <div ref={ref}>
       <Card sx={{ width: 600, margin: "auto" }} elevation={10}>
         <CardContent>
+        
           <Typography align="center" variant="h5">
-            WAROENG MAKAN
+          
+           KOPI HITADO
           </Typography>
           <Divider />
           <Box margin="50px"></Box>

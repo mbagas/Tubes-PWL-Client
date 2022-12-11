@@ -9,7 +9,7 @@ const Logout = () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     if (token) {
       await axios
-        .post("https://waroengmakan.herokuapp.com/api/logout")
+        .post("http://127.0.0.1:8000/api/logout")
         .then((response) => {
           localStorage.removeItem("token");
           localStorage.removeItem("user");

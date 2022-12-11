@@ -26,7 +26,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="#">
-        LessGoo
+        csgo
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -60,7 +60,7 @@ export default function Login() {
     values.password = data.get("password");
 
     axios
-      .post("https://waroengmakan.herokuapp.com/api/login", values)
+      .post("http://127.0.0.1:8000/api/login", values)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.user.role_id);
@@ -83,6 +83,7 @@ export default function Login() {
       <Grid component="main">
         <Paper elevation={20} style={paperStyle} maxWidth="xs">
           <Container>
+            
             <CssBaseline />
             <Box
               sx={{
@@ -92,11 +93,18 @@ export default function Login() {
                 alignItems: "center",
               }}
             >
-              <Avatar sx={{ m: 2, bgcolor: "secondary.main" }}>
-                {/* <LockOutlinedIcon /> */}
-              </Avatar>
+              
+
+             
+              
+              <Avatar
+                 alt=""
+                 src="/hitado.png"
+                 sx={{ width: '40%', height: '40%' }}
+                  />
+             
               <Typography component="h1" variant="h5">
-                Selamat Datang
+                Welcome
               </Typography>
               <Box
                 component="form"
@@ -128,9 +136,9 @@ export default function Login() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 5, mb: 2 }}
+                  sx={{ mt: 5, mb: 2, bgcolor:'maroon' }}
                 >
-                  Masuk
+                  Login
                 </Button>
               </Box>
             </Box>

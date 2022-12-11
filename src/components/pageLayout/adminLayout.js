@@ -2,6 +2,7 @@ import React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
 import {
   AccountCircle,
   ChevronLeft,
@@ -13,6 +14,9 @@ import {
   RestaurantMenu,
   ShoppingCart,
   Logout,
+  HomeOutlined,
+  FastfoodOutlined,
+  ShoppingCartOutlined,
 } from "@mui/icons-material";
 import {
   Badge,
@@ -114,24 +118,20 @@ if (role == 1) {
   ListMenu = [
     {
       text: "Beranda",
-      icon: <Home />,
+      icon: <HomeOutlined />,
       path: "/",
     },
     {
       text: "Produk",
-      icon: <RestaurantMenu />,
+      icon: <FastfoodOutlined />,
       path: "/produk",
     },
     {
       text: "Transaksi",
-      icon: <ShoppingCart />,
+      icon: <ShoppingCartOutlined />,
       path: "/transaksi",
     },
-    {
-      text: "Data Pegawai",
-      icon: <Group />,
-      path: "/user",
-    },
+   
     {
       text: "Logout",
       icon: <Logout />,
@@ -142,17 +142,17 @@ if (role == 1) {
   ListMenu = [
     {
       text: "Beranda",
-      icon: <Home />,
+      icon: <HomeOutlined />,
       path: "/",
     },
     {
       text: "Produk",
-      icon: <RestaurantMenu />,
+      icon: <FastfoodOutlined />,
       path: "/produk",
     },
     {
       text: "Transaksi",
-      icon: <ShoppingCart />,
+      icon: <ShoppingCartOutlined />,
       path: "/transaksi",
     },
     {
@@ -182,7 +182,7 @@ export default function Navbar(props) {
 
       {/* TOPBAR BOX */}
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar sx={{bgcolor:'maroon'}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -196,32 +196,21 @@ export default function Navbar(props) {
             <Menu />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            WAROENG MAKAN
+            KOPI HITADO
           </Typography>
 
           {/* ITEM ICON KANAN */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <Notifications />
-              </Badge>
+            
+            <IconButton sx={{width:'10%', height:'10%'}  } >
+            
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              // aria-controls={menuId}
-              aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <Avatar
+                 alt=""
+                 src="/hitado.png"
+                 sx={{marginLeft:'60%', width: '15%', height: '15%' }}
+                  />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
