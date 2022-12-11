@@ -34,7 +34,7 @@ const UpdateUser = () => {
 
   const fetchUsers = async () => {
     await axios
-      .get(`http://127.0.0.1:8000/api/user/${id}`)
+      .get(`https://waroengmakan.herokuapp.com/api/user/${id}`)
       .then((response) => {
         setUser(response.data);
       });
@@ -42,7 +42,7 @@ const UpdateUser = () => {
 
   const fetchRole = async () => {
     await axios
-      .get("http://127.0.0.1:8000/api/role")
+      .get("https://waroengmakan.herokuapp.com/api/role")
       .then((response) => {
         setRole(response.data);
       });
@@ -73,7 +73,7 @@ const UpdateUser = () => {
       console.log(values);
 
       axios
-        .put(`http://127.0.0.1:8000/api/user/${id}`, values)
+        .put(`https://waroengmakan.herokuapp.com/api/user/${id}`, values)
         .then((response) => {
           console.log(response);
           Swal.fire({

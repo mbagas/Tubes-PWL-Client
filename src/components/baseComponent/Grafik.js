@@ -54,7 +54,7 @@ export default function Grafik() {
   });
   const fetchGrafikTransaksi = async () => {
     await axios
-      .get("http://127.0.0.1:8000/api/grafik/transaksi")
+      .get("https://waroengmakan.herokuapp.com/api/grafik/transaksi")
       .then((response) => {
         setGrafikTransaksi(response.data);
         console.log(response.data);

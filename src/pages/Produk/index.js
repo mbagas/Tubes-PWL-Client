@@ -109,7 +109,7 @@ const Produk = () => {
   const fetchProduk = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await axios
-      .get("http://127.0.0.1:8000/api/produk")
+      .get("https://waroengmakan.herokuapp.com/api/produk")
       .then((response) => {
         console.log(response.data);
         setProduk(response.data);
@@ -144,7 +144,7 @@ const Produk = () => {
     }
 
     await axios
-      .delete(`http://127.0.0.1:8000/api/produk/${id}`)
+    delete(`https://waroengmakan.herokuapp.com/api/produk/${id}`)
       .then(({ data }) => {
         Swal.fire({
           icon: "success",
@@ -185,7 +185,7 @@ const Produk = () => {
             navigate("/produk/create");
           }}
           sx={{
-            mb: 2, bgcolor:'#495C83'
+            mb: 2, 
           }}
         >
           Create produk

@@ -118,17 +118,17 @@ if (role == 1) {
   ListMenu = [
     {
       text: "Beranda",
-      icon: <HomeOutlined />,
+      icon: <Home />,
       path: "/",
     },
     {
       text: "Produk",
-      icon: <FastfoodOutlined />,
+      icon: <RestaurantMenu />,
       path: "/produk",
     },
     {
       text: "Transaksi",
-      icon: <ShoppingCartOutlined />,
+      icon: <ShoppingCart />,
       path: "/transaksi",
     },
    
@@ -142,17 +142,17 @@ if (role == 1) {
   ListMenu = [
     {
       text: "Beranda",
-      icon: <HomeOutlined />,
+      icon: <Home />,
       path: "/",
     },
     {
       text: "Produk",
-      icon: <FastfoodOutlined />,
+      icon: <RestaurantMenu />,
       path: "/produk",
     },
     {
       text: "Transaksi",
-      icon: <ShoppingCartOutlined />,
+      icon: <ShoppingCart />,
       path: "/transaksi",
     },
     {
@@ -182,7 +182,7 @@ export default function Navbar(props) {
 
       {/* TOPBAR BOX */}
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{bgcolor:'maroon'}}>
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -196,21 +196,34 @@ export default function Navbar(props) {
             <Menu />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            KOPI HITADO
+            WAROENG MAKAN
           </Typography>
 
           {/* ITEM ICON KANAN */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             
-            <IconButton sx={{width:'10%', height:'10%'}  } >
-            
+          <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <Notifications />
+              </Badge>
             </IconButton>
-            <Avatar
-                 alt=""
-                 src="/hitado.png"
-                 sx={{marginLeft:'60%', width: '15%', height: '15%' }}
-                  />
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              // aria-controls={menuId}
+              aria-haspopup="true"
+              // onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+              </IconButton>  
+            
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

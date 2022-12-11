@@ -32,7 +32,7 @@ const Nota = forwardRef((props, ref) => {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       try {
         await axios
-          .get(`http://127.0.0.1:8000/api/transaksi/${props.id}`)
+        .get(`https://waroengmakan.herokuapp.com/api/transaksi/${props.id}`)
           .then((response) => {
             setTransaksi(response.data);
             console.log(transaksi);
@@ -52,7 +52,7 @@ const Nota = forwardRef((props, ref) => {
         
           <Typography align="center" variant="h5">
           
-           KOPI HITADO
+          WAROENG MAKAN
           </Typography>
           <Divider />
           <Box margin="50px"></Box>

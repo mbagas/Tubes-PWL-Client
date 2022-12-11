@@ -79,11 +79,11 @@ const Transaksi = () => {
           row.id ? (
             <Button
               variant="contained"
-              startIcon={<VisibilityOutlined />}
+              startIcon={<ReceiptIcon />}
               onClick={() => navigate(`/transaksi/detail/${row.id}`)}
-              sx={{bgcolor:'#22367E'}}
+              
             >
-              lihat
+              Cetak Nota
             </Button>
           ) : (
             console.log("gagal")
@@ -140,17 +140,16 @@ const Transaksi = () => {
           row.id ? (
             <Button
               variant="contained"
-              startIcon={<VisibilityOutlined />}
+              startIcon={<ReceiptIcon />}
               onClick={() => navigate(`/transaksi/detail/${row.id}`)}
-              sx={{bgcolor:'#22367E'}}
+              
             >
-              LIHAT
+              Cetak Nota
             </Button>
           ) : (
             console.log("gagal")
           ),
       },
-      
     ];
   }
   const navigate = useNavigate();
@@ -161,7 +160,7 @@ const Transaksi = () => {
 
   const fetchTransaksi = async () => {
     await axios
-      .get("http://127.0.0.1:8000/api/transaksi")
+      .get("https://waroengmakan.herokuapp.com/api/transaksi")
       .then((response) => {
         setTransaksi(response.data);
         console.log(transaksi);
@@ -198,7 +197,7 @@ const Transaksi = () => {
     }
 
     await axios
-      .delete(`http://127.0.0.1:8000/api/transaksi/${id}`)
+      .delete(`https://waroengmakan.herokuapp.com/api/transaksi/${id}`)
       .then(({ data }) => {
         Swal.fire({
           icon: "success",
@@ -238,7 +237,7 @@ const Transaksi = () => {
           navigate("/transaksi/create");
         }}
         sx={{
-          mb: 2,bgcolor:'#495C83'
+          mb: 2,
         }}
       >
         Create Transaksi

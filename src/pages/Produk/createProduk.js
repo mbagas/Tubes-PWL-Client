@@ -77,7 +77,7 @@ const CreateUser = () => {
       console.log(values);
 
       axios
-        .post("http://127.0.0.1:8000/api/produk", values)
+        .post("https://waroengmakan.herokuapp.com/api/produk", values)
         .then((response) => {
           console.log(response);
           Swal.fire({
